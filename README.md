@@ -25,7 +25,7 @@ $sample = '
     [/span6]
     [span4]
         [span6 class="first" ]dolor[/span6]
-        [span6  class="last" ]cudere[/span6]
+        [col6  class="last" ]cudere[/col6]
     [/span4]
 [/span6]
 
