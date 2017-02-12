@@ -8,9 +8,27 @@ Really simple shortcode parser without regex
 * with the ability to show shortcode instead of compile it
 * with predefined arguments
 
-## Example
+## Install
+
+To install with composer:
+
+```sh
+composer require artygrand/shortcode
+```
+
+Requires PHP 5.3 or newer.
+
+## Usage
+
+Here's a basic usage example:
 
 ```php
+<?php
+require __DIR__.'/vendor/autoload.php';
+
+// or
+// include 'path/to/Shortcode.php';
+
 $sample = '
 [shortcode]
 [short argument="value"]
@@ -36,29 +54,26 @@ $sample = '
 [/span6]
 ';
 
-include 'path/to/Shortcode.php';
+$sc = artygrand\Shortcode::getInstance();
 
-$sc = artygrand\Shortcode::instance();
-
-$sc ->add('shortcode', 'shortcode')
+$sc ->add('shortcode', 'func_shortcode')
     ->withAlias('short')
+
     ->add('span4', array(
         'grid',
-        array(
-            'cols' => 4
-    )))
+        array('cols' => 4)
+    ))
+
     ->add('span6', array(
         'grid',
-        array(
-            'cols' => 6
-    )))
+        array('cols' => 6)
+    ))
     ->withAlias('col6');
 
-echo $sample . "\n<hr>\n";
 echo $sc->compile($sample);
 
 // functions
-function shortcode($args, $content = null){
+function func_shortcode($args, $content = null){
     if (is_null($content)){
         return print_r($args, true);
     }
@@ -131,4 +146,4 @@ Array
 
 ## License
 
-Released under the MIT License - see `LICENSE.txt` for details.
+Released under the [MIT](LICENSE.txt) license.
